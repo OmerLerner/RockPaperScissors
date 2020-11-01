@@ -2,21 +2,21 @@ function playRound(playerSelection, computerSelection)//Recieves the player's an
 {
     if (playerSelection.localeCompare(computerSelection)==0)
         return "Tie game! You both chose "+computerSelection+".";
-    else if (playerSelection=="rock") //Player chooses rock
+    else if (playerSelection=="rock")
     {
         if (computerSelection=="scissors")
             return "You win! Rock beats Scissors!";
         else
             return "You lose! Paper beats Rock!"
     }
-    else if (playerSelection=="paper")//Player chooses paper
+    else if (playerSelection=="paper")
     {
         if (computerSelection=="rock")
             return "You win! Paper beats Rock!";
         else
             return "You lose! Scissors beats Paper!";
     }
-    else //Player chooses scissors
+    else
     {
         if (computerSelection=="paper")
             return "You win! Scissors beats Paper!"
@@ -56,25 +56,22 @@ function computerPlay() //Randomly generates the CPU's selection
             return "error";
     }
 }
-function game() //Simulates a game of 5 rounds
+function game() //Simulates a game of X rounds, X is decided by the value of "amountOfGames"
 {
     let playerSelection, computerSelection,gameResult, playerScore=0, computerScore=0, amountOfGames;
     amountOfGames=window.prompt("How many games would you like to play?"); //Choose the amount of games you want to play vs the CPU, rounds up decimal numbers
     amountOfGames=parseInt(amountOfGames,10);
-    while (isNaN(amountOfGames) | amountOfGames<0) //Checks for a valid input
+    while (isNaN(amountOfGames) | amountOfGames<0)
     {
         amountOfGames=window.prompt("Enter a valid amount of games.");
         amountOfGames=parseInt(amountOfGames,10);
-
-
     }
-
     for (i=0; i<=amountOfGames; i++)
     {
     playerSelection = window.prompt("Choose Rock, Paper or Scissors! ");
-    playerSelection = playerSelection.toLowerCase(); //Makes the function case insensitive
+    playerSelection = playerSelection.toLowerCase(); 
     console.log(playerSelection);
-    while (playerSelection!="rock" && playerSelection!="scissors" && playerSelection!="paper") //Loops until a valid input is recieved
+    while (playerSelection!="rock" && playerSelection!="scissors" && playerSelection!="paper") 
     {
         playerSelection = window.prompt("Type a valid input.");
         playerSelection = playerSelection.toLowerCase();
@@ -94,5 +91,4 @@ function game() //Simulates a game of 5 rounds
     else
         console.log("Tie game! The final score is "+playerScore+"-"+computerScore);
 }
-
 game();
