@@ -1,22 +1,22 @@
-function playRound(playerSelection, computerSelection)
+function playRound(playerSelection, computerSelection)//Recieves the player's and CPU's selections, returns a winner/loser/tie as a string message
 {
     if (playerSelection.localeCompare(computerSelection)==0)
         return "Tie game! You both chose "+computerSelection+".";
-    else if (playerSelection=="rock")
+    else if (playerSelection=="rock") //Player chooses rock
     {
         if (computerSelection=="scissors")
             return "You win! Rock beats Scissors!";
         else
             return "You lose! Paper beats Rock!"
     }
-    else if (playerSelection=="paper")
+    else if (playerSelection=="paper")//Player chooses paper
     {
         if (computerSelection=="rock")
             return "You win! Paper beats Rock!";
         else
             return "You lose! Scissors beats Paper!";
     }
-    else
+    else //Player chooses scissors
     {
         if (computerSelection=="paper")
             return "You win! Scissors beats Paper!"
@@ -24,7 +24,7 @@ function playRound(playerSelection, computerSelection)
             return "You lose! Rock beats Scissors!"
     }
 }
-function scoreOutput(playerScore, computerScore)
+function scoreOutput(playerScore, computerScore) //Recieves player's and CPU's scores, returns a string of the result
 {
     if (playerScore > computerScore)
         return "You are winning "+playerScore+"-"+computerScore;
@@ -33,7 +33,7 @@ function scoreOutput(playerScore, computerScore)
     else
         return "The game is tied up "+computerScore+"-"+playerScore;
 }
-function computerPlay()
+function computerPlay() //Randomly generates the CPU's selection
 {
     let num= Math.floor(Math.random() * 3);
     switch (num){
@@ -56,15 +56,25 @@ function computerPlay()
             return "error";
     }
 }
-function game()
+function game() //Simulates a game of 5 rounds
 {
-    let playerSelection, computerSelection,gameResult, playerScore=0, computerScore=0;
-    for (i=0; i<=4; i++)
+    let playerSelection, computerSelection,gameResult, playerScore=0, computerScore=0, amountOfGames;
+    amountOfGames=window.prompt("How many games would you like to play?"); //Choose the amount of games you want to play vs the CPU, rounds up decimal numbers
+    amountOfGames=parseInt(amountOfGames,10);
+    while (isNaN(amountOfGames) | amountOfGames<0) //Checks for a valid input
+    {
+        amountOfGames=window.prompt("Enter a valid amount of games.");
+        amountOfGames=parseInt(amountOfGames,10);
+
+
+    }
+
+    for (i=0; i<=amountOfGames; i++)
     {
     playerSelection = window.prompt("Choose Rock, Paper or Scissors! ");
     playerSelection = playerSelection.toLowerCase(); //Makes the function case insensitive
     console.log(playerSelection);
-    while (playerSelection!="rock" && playerSelection!="scissors" && playerSelection!="paper")
+    while (playerSelection!="rock" && playerSelection!="scissors" && playerSelection!="paper") //Loops until a valid input is recieved
     {
         playerSelection = window.prompt("Type a valid input.");
         playerSelection = playerSelection.toLowerCase();
