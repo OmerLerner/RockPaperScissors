@@ -11,7 +11,7 @@ function playRound(playerSelection, computerSelection)
     }
     else if (playerSelection=="paper")
     {
-        if (computerSelection.localeCompare("rock"))
+        if (computerSelection=="rock")
             return "You win! Paper beats Rock!";
         else
             return "You lose! Scissors beats Paper!";
