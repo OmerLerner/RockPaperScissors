@@ -1,3 +1,18 @@
+function init() //Initializes buttons & sets username
+{
+    pScore.textContent=playerScore; cScore.textContent=computerScore; pName.textContent=playerName;
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          game(button.id);
+        });
+      });
+    resetButton.addEventListener('click',() =>{
+        reset();
+        resetName();
+    });
+    playerName=window.prompt("What is your name?");
+    pName.textContent=playerName;
+}
 function playRound(playerSelection, computerSelection)//Recieves the player's and CPU's selections, returns a winner/loser/tie as a string message
 {
     if (playerSelection.localeCompare(computerSelection)==0)
@@ -56,21 +71,26 @@ function computerPlay() //Randomly generates the CPU's selection
             return "error";
     }
 }
-function reset()
+function reset() //Resets scores & text output
 {
     playerScore=0; computerScore=0; outputText.textContent="";
     pScore.textContent=playerScore;
     cScore.textContent=computerScore;
 }
-function game(playerSelection) //Simulates a game of X rounds, X is decided by the value of "amountOfGames"
+function resetName()
+{
+    playerName=window.prompt("What is your name?");
+    pName.textContent=playerName;
+}
+function game(playerSelection) //Simulates a game of 5 rounds
 {
     if (playerScore==5 || computerScore==5)
     {
         reset();
     }
     let computerSelection,gameResult, amountOfGames;
-    computerSelection = computerPlay(); //Randomly generates Rock, Paper or Scissors for the computer
-    gameResult = playRound(playerSelection, computerSelection);// Calculates the winner of the game
+    computerSelection = computerPlay(); 
+    gameResult = playRound(playerSelection, computerSelection);
     if (gameResult.search("win")!=-1)// If "Win" appears in the returned string, player has won
     {
         playerScore++;
@@ -81,26 +101,23 @@ function game(playerSelection) //Simulates a game of X rounds, X is decided by t
         computerScore++;
         cScore.textContent=computerScore;
     }
-    console.log(gameResult+" "+scoreOutput(playerScore,computerScore)); //Outputs the winner and the current score
+    // console.log(gameResult+" "+scoreOutput(playerScore,computerScore)); //Outputs the winner and the current score
     if (playerScore==5)
-        outputText.textContent="You are the winner! The final score is "+playerScore+"-"+computerScore;
+        outputText.textContent="You are the winner! The final score is "+playerScore+"-"+computerScore+".";
     else if (computerScore==5)
-        outputText.textContent="You lose! The final score is "+computerScore+"-"+playerScore;
+        outputText.textContent="You lose! The final score is "+computerScore+"-"+playerScore+".";
     else
-        outputText.textContent=gameResult;
+        outputText.textContent=gameResult; //Outputs the winner and the current score
 
 }
-const container= document.querySelector('#container');
-const buttons = container.querySelectorAll('button');
-let playerScore=0, computerScore=0;
-const pScore = document.querySelector('#player-score'), cScore = document.querySelector('#computer-score'), outputText=document.querySelector('#output-text')
-pScore.textContent=playerScore; cScore.textContent=computerScore;             
-buttons.forEach((button) => {
-    button.addEventListener('click', () => {
-      game(button.id);
-    });
-  });
-const resetButton = document.querySelector('#reset');
-resetButton.addEventListener('click',() =>{
-         reset();
-     });
+
+let playerScore=0, computerScore=0, playerName="";
+const pName=document.querySelector('#player-name'),
+pScore = document.querySelector('#player-score'), 
+container= document.querySelector('#container');
+cScore = document.querySelector('#computer-score'), 
+outputText=document.querySelector('#output-text'),
+buttons = container.querySelectorAll('button'),
+resetButton = document.querySelector('#reset');
+init();
+
